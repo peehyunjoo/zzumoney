@@ -15,3 +15,7 @@ Route::get('/', function () {
   //  return view('welcome');
 	return view('login');
 });
+Route::get('auth/register',[
+        'as' => 'users.create',
+        'uses' => 'UsersController@create'
+]);

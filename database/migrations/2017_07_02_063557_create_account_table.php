@@ -15,12 +15,14 @@ class CreateAccountTable extends Migration
     {
       Schema::create('accounts', function($table)   {
           $table->increments('idx'); // id INT AUTO_INCREMENT PRIMARY KEY
-          $table->string('type', 1);
-          $table->expense_type('type', 1); // title VARCHAR(100)
+          $table->string('expense_type', 1);
+          $table->string('type', 1); // title VARCHAR(100)
           $table->string('account_name', 100);
-          $table->integer('amount', 20);
+          $table->integer('amount')->length(10)->unsigned();
           $table->date('date');  // body TEXT
           $table->timestamps(); // created_at TIMESTAMP, updated_at TIMESTAMP
+          $table->integer('user_id')->unsigned()->index();
+          
           $table->foreign('user_id')->references('id')->on('users');
       });
     }
