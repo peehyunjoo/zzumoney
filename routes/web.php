@@ -12,5 +12,24 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+	return view('welcome');
 });
+
+Route::get('success', [
+    'middleware' => 'auth',
+    function () {
+	return redirect('list');
+    }
+]);
+
+Route::get('list',function(){
+	return view('list');
+});
+Route::get('logout',function(){
+        auth()->logout();
+	Session::flash('flash_message','logout success');
+	return redirect('login');
+});
+Route::resource('login','LoginController');
+Route::resource('users','UsersController');
+Route::resource('account','AccountController');
