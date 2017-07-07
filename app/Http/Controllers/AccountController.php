@@ -53,7 +53,7 @@ class AccountController extends Controller
 	if ($validator->fails()) {
 		return redirect('account/create')->withErrors($validator)->withInput();
     	}
-	$amount = \App\User::find(1)->accounts()->create([
+	$amount = \App\User::find(auth()->user()->id)->accounts()->create([
 		'expense_type'=>$request->input('gridRadios'),
                 'type'=>$request->input('type'),
                 'account_name'=>$request->input('history'),
@@ -81,7 +81,7 @@ class AccountController extends Controller
      */
     public function show($id)
     {
-        //
+        echo "show";
     }
 
     /**
@@ -92,8 +92,10 @@ class AccountController extends Controller
      */
     public function edit($id)
     {
-        //
+	$amount=\App\Account::where('idx', '=',$id)->get();
+        return view('edit',compact('amount'));
     }
+
 
     /**
      * Update the specified resource in storage.
@@ -104,7 +106,23 @@ class AccountController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+	$rule =[
+        'date' =>['required'],
+        'history' => ['required'],
+        'amount' =>['required'],
+        ];
+        $validator = Validator::make($request->all(), $rule);
+        if ($validator->fails()) {
+                return redirect('account/create')->withErrors($validator)->withInput();
+        }
+        $amount = \App\Account::where('idx','=',$id)->update([
+                'expense_type'=>$request->input('gridRadios'),
+                'type'=>$request->input('type'),
+                'account_name'=>$request->input('history'),
+                'amount'=>$request->input('amount'),
+                'date'=>$request->input('date'),
+        ]);
+	return redirect('list');
     }
 
     /**
@@ -115,6 +133,7 @@ class AccountController extends Controller
      */
     public function destroy($id)
     {
-        //
+	$amount = \App\Account::where('idx','=',$id)->delete();
+	return redirect('list');
     }
 }

@@ -35,4 +35,8 @@ Route::get('logout',function(){
 Route::resource('login','LoginController');
 Route::resource('users','UsersController');
 Route::resource('account','AccountController');
+#Route::resource('account','AccountController',['except'=>'destroy']);
+#Route::post(['as'=>'account.destroy','uses'=>'AccountController@destroy']);
 Route::resource('fix_account','FixAccountController');
+#Route::delete('account/{account}','AccountController@destroy')->name('destroy');
+Route::get('account/{account}/delete', ['as' => 'account.destroy', 'uses' => 'AccountController@destroy']);

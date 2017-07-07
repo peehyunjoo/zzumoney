@@ -12,8 +12,8 @@
 	<nav class="navbar navbar-light add">
   <form class="form-inline">
 	<a class="btn btn-primary" href="{{ url('account/create')}}"  role="button">추가</a>&nbsp;
-        <a class="btn btn-primary" href="{{ url('fix_account/show?expense') }}"  role="button">고정지출</a>&nbsp;
-        <a class="btn btn-primary" href="{{ url('fix_account/show?income') }}"  role="button">고정수입</a>&nbsp;
+        <a class="btn btn-primary" href="{{ url('fix_account/show') }}"  role="button">고정지출</a>&nbsp;
+        <a class="btn btn-primary" href="{{ url('fix_account/show') }}"  role="button">고정수입</a>&nbsp;
   </form>
 </nav>
 	<table class="table">
@@ -22,6 +22,7 @@
 	      <th>날짜</th>
 	      <th>내역</th>
 	      <th>지출/수입</th>
+	      <th>수정/삭제</th>
 	    </tr>
 	  </thead>
 	<tbody>
@@ -30,6 +31,12 @@
 	    <td>{{$data->date}}</td>
 	    <td>{{$data->account_name}}</td>
 	    <td>{{number_format($data->amount)}}</td>
+	    <td><a class="btn btn-primary" href="{{ route('account.edit', $data->idx)}}"  role="button">수정</a> &nbsp;
+		<a class="btn btn-primary" href="{{ route('account.destroy',$data->idx)}}"  role="button">삭제</a>
+		<!--<form class="" action="{{ route('account.destroy', $data->idx) }}" method="DELETE">
+    			<button type="submit" class="btn btn-danger">삭제</button>
+		</form>-->
+		</td>
 	    </tr>
 		@empty
     	    <tr>
