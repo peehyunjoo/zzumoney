@@ -6,7 +6,7 @@
         }
 </style>
 <div class="container">
-<form action="{{ route('users.store') }}" method="POST" class="form_auth">
+<form action="{{ route('register') }}" method="POST" class="form_auth">
 	 {!! csrf_field() !!}
 	<div class="form-group" {{ $errors->has('name') ? 'has-error' : '' }}">
 		<input type="text" name="name" class="form-control" placeholder="name" value="{{ old('name') }}" autofocus/>

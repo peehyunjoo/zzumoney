@@ -23,9 +23,7 @@
 		});
 	});
 </script>
-<div class="container-fluid">
-                @include('nav')
-</div>
+
 fix
 <div class="container">
   <form method="POST" action="{{ route('fix_account.store') }}">

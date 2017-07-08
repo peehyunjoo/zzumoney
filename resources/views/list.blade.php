@@ -5,9 +5,6 @@
 	}
 </style>
 @section('content')
-<div class="container-fluid">
-		@include('nav')
-</div>
 <div class="container">
 	<nav class="navbar navbar-light add">
   <form class="form-inline">

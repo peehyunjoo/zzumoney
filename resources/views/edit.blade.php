@@ -23,16 +23,14 @@
 		});
 	});
 </script>
-<div class="container-fluid">
-                @include('nav')
-</div>
+
 <div class="container">
   <form method="POST" action="{{ route('account.update',$amount[0]->idx)}}">
 		{{ method_field('PATCH') }}
-	
+
 	 {!! csrf_field() !!}
 		<nav class="navbar"></nav>
-		
+
 		<div class="form-group row">
 		<div class="form-check form-check-inline">
           			<label class="form-check-label">

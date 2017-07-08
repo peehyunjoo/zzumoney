@@ -46,7 +46,9 @@ class UsersController extends Controller
 		'password'=>bcrypt($request->input('password')),
 	]);
 	return redirect('/');
-    }	
+
+    }
+
 
     /**
      * Display the specified resource.

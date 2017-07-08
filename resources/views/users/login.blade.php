@@ -1,5 +1,5 @@
 @extends('layout.container')
-@section('content')        
+@section('content')
 <style>
         .container{
                 margin-top:15%;
@@ -7,7 +7,7 @@
         </style>
 <div class="container">
 <div style="text-align:center;font-size:50px;">project</div>
-	<form class="form-horizontal" role="form" method="POST" action="{{ route('login.store') }}">
+	<form class="form-horizontal" role="form" method="POST" action="{{ route('login') }}">
                         {{ csrf_field() }}
 
                         <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
@@ -53,7 +53,7 @@
                                 <button type="submit" class="btn btn-primary">
                                     Login
                                 </button>
-				<a class="btn btn-primary" role="button"  href=" {{ url('users/create') }}">
+				<a class="btn btn-primary" role="button"  href=" {{ route('register') }}">
                                     register
 				</a>
                             </div>

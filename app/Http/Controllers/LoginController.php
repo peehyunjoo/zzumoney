@@ -47,7 +47,7 @@ class LoginController extends Controller
         }
 	return redirect('success');
     }
-    
+
 
     /**
      * Display the specified resource.

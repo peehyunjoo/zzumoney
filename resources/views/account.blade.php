@@ -7,7 +7,7 @@
 		display:none;
 	}
 </style>
-@section('content')
+@section('script')
 <script>
 	$(document).ready(function(){
                 $("#inlineRadio2").click(function(){
@@ -23,9 +23,8 @@
 		});
 	});
 </script>
-<div class="container-fluid">
-                @include('nav')
-</div>
+@stop
+@section('content')
 <div class="container">
   <form method="POST" action="{{ route('account.store') }}">
 	 {!! csrf_field() !!}

@@ -12,9 +12,35 @@
 */
 
 Route::get('/', function () {
-	return view('welcome');
+	return view('users.login');
 });
 
+//auth를 사용하기위한 routes
+Auth::routes();
+Route::middleware('auth')->group(function () {
+    Route::get('list', function () {
+        return view('list');
+    });
+});
+Route::middleware('guest')->group(function () {
+    Route::get('/', function() {
+        return view('users.login');
+    });
+});
+Route::group(['middleware' => 'auth'], function() {
+  Route::resource('account', 'AccountController');
+});
+Route::get('list','AccountController@index');
+Route::get('logout',function(){
+        auth()->logout();
+	Session::flash('flash_message','logout success');
+	return redirect('/');
+});
+/*Route::middleware('auth')->group(function () {
+    Route::get('/', function () {
+        return view('welcome');
+    });
+});
 Route::get('success', [
     'middleware' => 'auth',
     function () {
@@ -22,21 +48,15 @@ Route::get('success', [
     }
 ]);
 
-/*Route::get('list',function(){
-	return view('list');
-});*/
 
-Route::get('list','AccountController@index');
-Route::get('logout',function(){
-        auth()->logout();
-	Session::flash('flash_message','logout success');
-	return redirect('login');
-});
+
+
 Route::resource('login','LoginController');
+*/
 Route::resource('users','UsersController');
-Route::resource('account','AccountController');
-#Route::resource('account','AccountController',['except'=>'destroy']);
-#Route::post(['as'=>'account.destroy','uses'=>'AccountController@destroy']);
+#Route::resource('account','AccountController');
+
 Route::resource('fix_account','FixAccountController');
-#Route::delete('account/{account}','AccountController@destroy')->name('destroy');
-Route::get('account/{account}/delete', ['as' => 'account.destroy', 'uses' => 'AccountController@destroy']);
+
+Route::get('account/{account}/delete',
+	['as' => 'account.destroy', 'uses' => 'AccountController@destroy']);
