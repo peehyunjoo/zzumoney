@@ -44,7 +44,7 @@ class FixAccountController extends Controller
     public function show($id)
     {
 	echo $id;exit;
-        return view('fix_account');
+        return view('fix_account.add');
     }
 
     /**

@@ -24,7 +24,7 @@ class AccountController extends Controller
     public function index()
     {
         $amount=\App\Account::all();
-        return view('list',compact('amount'));
+        return view('account.list',compact('amount'));
     }
 
     /**
@@ -34,7 +34,7 @@ class AccountController extends Controller
     */
     public function create()
     {
-        return view('account');
+        return view('account.add');
     }
 
     /**
@@ -94,7 +94,7 @@ class AccountController extends Controller
     public function edit($id)
     {
         $amount=\App\Account::where('idx', '=',$id)->get();
-        return view('edit',compact('amount'));
+        return view('account.edit',compact('amount'));
     }
 
 

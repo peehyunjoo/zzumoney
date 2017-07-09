@@ -19,7 +19,7 @@ Route::get('/', function () {
 Auth::routes();
 Route::middleware('auth')->group(function () {
     Route::get('list', function () {
-        return view('list');
+        return view('account.list');
     });
 });
 Route::middleware('guest')->group(function () {
@@ -36,23 +36,7 @@ Route::get('logout',function(){
 	Session::flash('flash_message','logout success');
 	return redirect('/');
 });
-/*Route::middleware('auth')->group(function () {
-    Route::get('/', function () {
-        return view('welcome');
-    });
-});
-Route::get('success', [
-    'middleware' => 'auth',
-    function () {
-	return redirect('list');
-    }
-]);
 
-
-
-
-Route::resource('login','LoginController');
-*/
 Route::resource('users','UsersController');
 #Route::resource('account','AccountController');
 
@@ -60,3 +44,7 @@ Route::resource('fix_account','FixAccountController');
 
 Route::get('account/{account}/delete',
 	['as' => 'account.destroy', 'uses' => 'AccountController@destroy']);
+
+/* Socialite */
+Route::get('social/github', 'Auth\LoginController@redirectToProvider');
+Route::get('social/github/callback', 'Auth\LoginController@handleProviderCallback');

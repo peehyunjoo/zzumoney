@@ -6,6 +6,7 @@
 	.default{
 		display:none;
 	}
+	
 </style>
 @section('content')
 <script>

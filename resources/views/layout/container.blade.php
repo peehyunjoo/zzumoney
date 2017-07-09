@@ -8,16 +8,15 @@
         <title>Laravel</title>
 
         <!-- Fonts -->
-        <link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css">
-	<script src="//code.jquery.com/jquery.min.js"></script>
-        <link href="{{asset('css/bootstrap/css/bootstrap.min.css')}}" rel="stylesheet" type="text/css">
+	    <script src="{{mix('js/all.js')}}"></script>
+        <link href="{{mix('css/app.css')}}" rel="stylesheet" type="text/css">
 
         @yield('style')
         @yield('script')
     </head>
     <body>
         <div class="container-fluid">
-                        @include('nav')
+                        @include('layout.nav')
         </div>
 	@yield('content')
     </body>
