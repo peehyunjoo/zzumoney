@@ -38,8 +38,6 @@ Route::get('logout',function(){
 });
 
 Route::resource('users','UsersController');
-#Route::resource('account','AccountController');
-
 Route::resource('fix_account','FixAccountController');
 
 Route::get('account/{account}/delete',

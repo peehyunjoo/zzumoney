@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
 
 class FixAccountController extends Controller
@@ -22,6 +23,7 @@ class FixAccountController extends Controller
      */
     public function create()
     {
+        return view('fix_account.add');
     }
 
     /**
@@ -32,7 +34,24 @@ class FixAccountController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $rule =[
+            'date' =>['required'],
+            'history' => ['required'],
+            'amount' =>['required'],
+        ];
+        $validator = Validator::make($request->all(), $rule);
+        if ($validator->fails()) {
+            return redirect('fix_account/create')->withErrors($validator)->withInput();
+        }
+        $amount = \App\User::find(auth()->user()->id)->fix_accounts()->create([
+            'expense_type'=>$request->input('gridRadios'),
+            'type'=>$request->input('type'),
+            'account_name'=>$request->input('history'),
+            'amount'=>$request->input('amount'),
+            'date'=>$request->input('date'),
+        ]);
+
+        return redirect('list');
     }
 
     /**

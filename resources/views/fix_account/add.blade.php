@@ -6,17 +6,17 @@
 	.default{
 		display:none;
 	}
-	
+
 </style>
 @section('content')
-<script>
+<script type="text/javascript">
 	$(document).ready(function(){
-                $("#inlineRadio2").click(function(){
+        $("#inlineRadio2").click(function(){
 			//$("#selectbox").css("display","block");
 			$("#selectbox").show();
 			$(".gift").attr("selected","selected");
 			$(".default").removeAttr("selected");
-                });
+        });
 		$("#inlineRadio1").click(function(){
 			$("#selectbox").hide();
 			$(".default").attr("selected","selected");
@@ -24,8 +24,6 @@
 		});
 	});
 </script>
-
-fix
 <div class="container">
   <form method="POST" action="{{ route('fix_account.store') }}">
 	 {!! csrf_field() !!}

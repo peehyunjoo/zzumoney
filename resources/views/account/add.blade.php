@@ -58,7 +58,7 @@
 		</div>
     <div class="form-group row">
     	<label for="date" class="col-sm-2 col-form-label">날짜</label>
-      		<div class="col-sm-10" {{ $errors->has('date') ? 'has-error' : '' }}">
+      		<div class="col-sm-10 {{ $errors->has('date') ? 'has-error' : '' }}">
         		<input type="date" class="form-control" id="date" name="date" value="{{ old('date') }}" autofocus/>
 				{!! $errors->first('date', '<span class="form-error">:message</span>') !!}
       		</div>
@@ -66,7 +66,7 @@
 
     <div class="form-group row">
     	<label for="history" class="col-sm-2 col-form-label">내역</label>
-      		<div class="col-sm-10" {{ $errors->has('history') ? 'has-error' : '' }}">
+      		<div class="col-sm-10 {{ $errors->has('history') ? 'has-error' : '' }}">
         		<input type="text" class="form-control" id="history" name="history" value="{{ old('history') }}" autofocus/>
 				{!! $errors->first('history', '<span class="form-error">:message</span>') !!}
       		</div>
@@ -74,7 +74,7 @@
 
     <div class="form-group row">
     	<label for="amount" class="col-sm-2 col-form-label">금액</label>
-      		<div class="col-sm-10" {{ $errors->has('amount') ? 'has-error' : '' }}">
+      		<div class="col-sm-10 {{ $errors->has('amount') ? 'has-error' : '' }}">
         		<input type="text" class="form-control" id="amount" name="amount" value="{{ old('amount') }}" autofocus/>
 				{!! $errors->first('amount', '<span class="form-error">:message</span>') !!}
       		</div>

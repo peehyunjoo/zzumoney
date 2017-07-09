@@ -28,5 +28,8 @@ class User extends Authenticatable
     ];
 	public function accounts(){
                 return $this->hasMany('App\Account');
-        }
+    }
+    public function fix_accounts(){
+        return $this->hasMany('App\FixAccount');
+    }
 }

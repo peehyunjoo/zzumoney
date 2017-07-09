@@ -9,8 +9,7 @@
 	<nav class="navbar navbar-light add">
   <form class="form-inline">
 	<a class="btn btn-primary" href="{{ url('account/create')}}"  role="button">추가</a>&nbsp;
-        <a class="btn btn-primary" href="{{ url('fix_account/show') }}"  role="button">고정지출</a>&nbsp;
-        <a class="btn btn-primary" href="{{ url('fix_account/show') }}"  role="button">고정수입</a>&nbsp;
+        <a class="btn btn-primary" href="{{ url('fix_account/create') }}"  role="button">고정등록</a>&nbsp;
   </form>
 </nav>
 	<table class="table">

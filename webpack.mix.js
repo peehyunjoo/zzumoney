@@ -15,16 +15,20 @@ mix
 .copy('node_modules/bootstrap-v4-dev/dist/css/bootstrap.min.css', 'resources/assets/css/bootstrap.min.css')
 .copy('node_modules/font-awesome/css/font-awesome.min.css', 'resources/assets/css/font-awesome.min.css')
 .copy('node_modules/font-awesome/fonts/**', 'public/fonts')
+.autoload({
+    jquery: ['$', 'window.jQuery', 'jQuery'],
+    tether: ['window.Tether', 'Tether']
+})
 .js(['node_modules/tether/dist/js/tether.min.js',
      'node_modules/jquery/dist/jquery.min.js',
-     'node_modules/bootstrap-v4-dev/dist/js/bootstrap.min.js'
+     'node_modules/bootstrap-v4-dev/dist/js/bootstrap.min.js',
+     'resources/assets/js/app.js',
  ], 'public/js/all.js')
  .styles([
     'resources/assets/css/bootstrap.min.css',
     'resources/assets/css/font-awesome.min.css',
 ], 'public/css/app.css')
 .version()
-.autoload({
-    jquery: ['$', 'window.jQuery', 'jQuery'],
-    tether: ['window.Tether', 'Tether']
-})
+.browserSync({
+    proxy: '35.185.134.161'
+});
