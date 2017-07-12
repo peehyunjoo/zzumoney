@@ -5,7 +5,8 @@ use Closure;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
-use Illuminate\Support\Facades\Auth;
+#use Illuminate\Support\Facades\Auth;
+use Auth;
 class AccountController extends Controller
 {
     /**
@@ -23,6 +24,9 @@ class AccountController extends Controller
 
     public function index()
     {
+        if(!Auth::check()){
+            return redirect('/');
+        }
         #$amount=\App\Account::all();
 	$amount=\App\Account::where('user_id', '=' , auth()->user()->id )->get();
 	#$amount=\App\Account::join('users','accounts.user_id','=','users.id')->select('users.','accounts.user_id')->get();
