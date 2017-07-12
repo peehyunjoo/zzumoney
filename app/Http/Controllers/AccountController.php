@@ -23,7 +23,9 @@ class AccountController extends Controller
 
     public function index()
     {
-        $amount=\App\Account::all();
+        #$amount=\App\Account::all();
+	$amount=\App\Account::where('user_id', '=' , auth()->user()->id )->get();
+	#$amount=\App\Account::join('users','accounts.user_id','=','users.id')->select('users.','accounts.user_id')->get();
         return view('account.list',compact('amount'));
     }
 

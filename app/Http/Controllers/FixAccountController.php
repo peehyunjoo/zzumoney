@@ -50,6 +50,13 @@ class FixAccountController extends Controller
             'amount'=>$request->input('amount'),
             'date'=>$request->input('date'),
         ]);
+	/*$amount = \App\User::find(auth()->user()->id)->accounts()->create([
+            'expense_type'=>$request->input('gridRadios'),
+            'type'=>$request->input('type'),
+            'account_name'=>$request->input('history'),
+            'amount'=>$request->input('amount'),
+            'date'=>$request->input('date'),
+        ]);*/
 
         return redirect('list');
     }
