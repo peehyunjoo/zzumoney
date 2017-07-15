@@ -2,9 +2,13 @@
 @section('content')
 <style>
         .container{
-                margin-top:15%;
+                top:15vh;
+        }
+        hr{
+            margin:1.5em 0em;
         }
         </style>
+
 <div class="container">
 <div style="text-align:center;font-size:50px;">project</div>
 	<form class="form-horizontal" role="form" method="POST" action="{{ route('login') }}">
@@ -50,12 +54,11 @@
 				@if(Session::has('flash_message'))
         			<span>{!! session('flash_message') !!}</span>
 				@endif
-                                <button type="submit" class="btn btn-primary">
+                                <button type="submit" class="btn btn-primary btn-block">
                                     Login
                                 </button>
-				<a class="btn btn-primary" role="button"  href=" {{ route('register') }}">
-                                    register
-				</a>
+				<a href="{{ route('register') }}" class="btn btn-primary btn-block"><i class=""></i> 회원가입</a><hr>
+                <a href="social/github" class="btn btn-secondary btn-block"><i class="fa fa-github"></i> 깃허브로 로그인</a>
                             </div>
                         </div>
                     </form>

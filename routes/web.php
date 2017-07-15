@@ -10,23 +10,25 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-
 Route::get('/', function () {
-	return view('users.login');
+    return redirect(route('account.index'));
 });
+// Route::get('/', function () {
+// 	return view('users.login');
+// });
 
 //auth를 사용하기위한 routes
 Auth::routes();
-Route::middleware('auth')->group(function () {
-    Route::get('list', function () {
-        return view('account.list');
-    });
-});
-Route::middleware('guest')->group(function () {
-    Route::get('/', function() {
-        return view('users.login');
-    });
-});
+// Route::middleware('auth')->group(function () {
+//     Route::get('list', function () {
+//         return view('account.list');
+//     });
+// });
+// Route::middleware('guest')->group(function () {
+//     Route::get('/', function() {
+//         return view('users.login');
+//     });
+// });
 Route::group(['middleware' => 'auth'], function() {
   Route::resource('account', 'AccountController');
 });
@@ -44,5 +46,9 @@ Route::get('account/{account}/delete',
 	['as' => 'account.destroy', 'uses' => 'AccountController@destroy']);
 
 /* Socialite */
-Route::get('social/github', 'Auth\LoginController@redirectToProvider');
-Route::get('social/github/callback', 'Auth\LoginController@handleProviderCallback');
+#Route::get('social/github', 'Auth\LoginController@redirectToProvider');
+Route::get('social/{provider}/callback', 'SocialController@handleProviderCallback');
+Route::get('social/{provider}',[
+	'as'=>'social.login',
+	'uses'=>'SocialController@execute',
+]);

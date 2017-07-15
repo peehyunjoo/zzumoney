@@ -33,27 +33,28 @@ class LoginController extends Controller
      *
      * @return void
      */
-    public function __construct()
-    {
-        $this->middleware('guest')->except('logout');
-    }
-    public function showLoginForm() {
-       return view('users.login');
-   }
+     public function __construct()
+     {
+         $this->middleware('guest')->except('logout');
+     }
+     public function showLoginForm() {
+         return view('users.login');
+     }
 
-   public function redirectToProvider()
-   {
-       return Socialite::driver('github')->redirect();
-   }
-   public function handleProviderCallback()
-    {
-        $user = Socialite::driver('github')->user();
+     public function redirectToProvider()
+     {
+         return Socialite::driver('github')->redirect();
+     }
+     public function handleProviderCallback()
+     {
+         $user = Socialite::driver('github')->user();
 
-        dd($user);
-    }
-   /*public function logout(){
-       auth()->logout();
-       return redirect('login');
-   }*/
+         dd($user);
+         // 유저를 추가한다.
+     }
+     public function logout(){
+         auth()->logout();
+         return redirect('login');
+     }
 
-}
+ }
