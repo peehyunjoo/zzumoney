@@ -29,9 +29,9 @@ Auth::routes();
 //         return view('users.login');
 //     });
 // });
-Route::group(['middleware' => 'auth'], function() {
-  Route::resource('account', 'AccountController');
-});
+Route::resource('account', 'AccountController',
+    ['middleware' => ['web', 'auth']]
+);
 Route::get('list','AccountController@index');
 Route::get('logout',function(){
         auth()->logout();
@@ -40,10 +40,16 @@ Route::get('logout',function(){
 });
 
 Route::resource('users','UsersController');
-Route::resource('fix_account','FixAccountController');
-
+Route::resource('fix_account','FixAccountController',
+    ['middleware' => ['web', 'auth']]
+);
+Route::get('fix_account/{account}/delete',
+	['as' => 'fix_account.destroy', 'uses' => 'FixAccountController@destroy']
+);
 Route::get('account/{account}/delete',
-	['as' => 'account.destroy', 'uses' => 'AccountController@destroy']);
+	['as' => 'account.destroy', 'uses' => 'AccountController@destroy']
+);
+
 
 /* Socialite */
 #Route::get('social/github', 'Auth\LoginController@redirectToProvider');

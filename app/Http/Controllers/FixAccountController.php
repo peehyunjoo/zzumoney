@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
 
+use Auth;
+
 class FixAccountController extends Controller
 {
     /**
@@ -14,6 +16,8 @@ class FixAccountController extends Controller
      */
     public function index()
     {
+        $fix_amount=\App\FixAccount::all();
+        return view('fix_account.list',compact('fix_amount'));
     }
 
     /**
@@ -81,7 +85,8 @@ class FixAccountController extends Controller
      */
     public function edit($id)
     {
-        //
+        $fix_amount=\App\FixAccount::where('idx', '=',$id)->get();
+        return view('fix_account.edit',compact('fix_amount'));
     }
 
     /**
@@ -93,7 +98,23 @@ class FixAccountController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $rule =[
+            'date' =>['required'],
+            'history' => ['required'],
+            'amount' =>['required'],
+        ];
+        $validator = Validator::make($request->all(), $rule);
+        if ($validator->fails()) {
+            return redirect('fix_account/create')->withErrors($validator)->withInput();
+        }
+        $amount = \App\FixAccount::where('idx','=',$id)->update([
+            'expense_type'=>$request->input('gridRadios'),
+            'type'=>$request->input('type'),
+            'account_name'=>$request->input('history'),
+            'amount'=>$request->input('amount'),
+            'date'=>$request->input('date'),
+        ]);
+        return redirect('fix_account');
     }
 
     /**
@@ -104,6 +125,7 @@ class FixAccountController extends Controller
      */
     public function destroy($id)
     {
-        //
+        \App\FixAccount::where('idx', '=', $id)->delete();
+        return redirect('fix_account');
     }
 }
