@@ -62,7 +62,7 @@ class FixAccountController extends Controller
             'date'=>$request->input('date'),
         ]);*/
 
-        return redirect('list');
+        return redirect('account');
     }
 
     /**

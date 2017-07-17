@@ -13,6 +13,12 @@
 	<a class="btn btn-primary" href="{{ url('fix_account') }}"  role="button">고정리스트</a>&nbsp;
   </form>
 </nav>
+		@php
+			$next_date=date('Y-m', strtotime($date.' + 1 month'));
+			$prev_date=date('Y-m', strtotime($date.' - 1 month'));
+		@endphp
+	<a href="{{url('account?date='.$prev_date)}}"><i class="fa fa-arrow-left" aria-hidden="true"></i></a>{{ $date }}
+	<a href="{{url('account?date='.$next_date)}}"><i class="fa fa-arrow-right" aria-hidden="true"></i></a>
 	<table class="table">
 	  <thead>
 	    <tr>
@@ -42,5 +48,12 @@
     		@endforelse
     	</tbody>
 	</table>
+	<div>
+	총수입: {{$sum[0]}}
+	총지출:{{$sum[1]}}
+	기타수입:{{$sum[2]}}
+	기타지출:{{$sum[3]}}
+	총잔액:{{$sum[4]}}
+	</div>
 </div>
 @stop

@@ -32,7 +32,7 @@ Auth::routes();
 Route::resource('account', 'AccountController',
     ['middleware' => ['web', 'auth']]
 );
-Route::get('list','AccountController@index');
+#Route::get('list','AccountController@index');
 Route::get('logout',function(){
         auth()->logout();
 	Session::flash('flash_message','logout success');

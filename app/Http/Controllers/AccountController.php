@@ -22,15 +22,58 @@ class AccountController extends Controller
         }
     }
 
-    public function index()
+    public function index(request $request)
     {
+	/*if($_GET){
+		$date =	$_GET['date'];
+	}else{
+		$date  = date('Y-m');
+	}*/
+	if($request->input('date')){
+		$date=$request->input('date');
+	}else{
+		$date=date('Y-m');
+	}
+		
         if(!Auth::check()){
             return redirect('/');
         }
         #$amount=\App\Account::all();
-	$amount=\App\Account::where('user_id', '=' , auth()->user()->id )->get();
+	$amount=\App\Account::where('user_id', '=' , auth()->user()->id )
+			     ->where('date','like','%'.$date.'%')
+			     ->orderBy('date')
+		    	     ->get();
+	$income = 0;
+	$expenditure = 0;
+	$etc_income = 0;
+	$etc_expenditure = 0;
+	$except_totalsum = 0;
+	foreach($amount as $amounts){
+		if($amounts->expense_type == '1'){
+			$income+=$amounts->amount;
+		}
+	}
+	foreach($amount as $amounts){
+                if($amounts->expense_type == '2'){
+                        $expenditure+=$amounts->amount;
+                }
+        }
+	foreach($amount as $amounts){
+                if($amounts->expense_type == '1' && $amounts->type != 'd'){
+                        $etc_income+=$amounts->amount;
+                }
+        }
+	foreach($amount as $amounts){
+                if($amounts->expense_type == '2' && $amounts->type != 'd'){
+                        $etc_expenditure+=$amounts->amount;
+                }
+        }
+	$totalsum = $income - $expenditure;
+	#$except_totalsum = $income - $expenditure + $etc_expenditure;
+	
+	$sum = array($income,$expenditure,$etc_income,$etc_expenditure,$totalsum);
 	#$amount=\App\Account::join('users','accounts.user_id','=','users.id')->select('users.','accounts.user_id')->get();
-        return view('account.list',compact('amount'));
+        return view('account.list',compact('amount','date','sum'));
     }
 
     /**
@@ -77,7 +120,7 @@ class AccountController extends Controller
     /*echo $request->input('type');
     echo $request->input('gridRadios');
     echo $request->input('date');*/
-    return redirect('list');
+    return redirect('account');
     }
 
     /**
@@ -129,7 +172,7 @@ class AccountController extends Controller
             'amount'=>$request->input('amount'),
             'date'=>$request->input('date'),
         ]);
-        return redirect('list');
+        return redirect('account');
     }
 
     /**
