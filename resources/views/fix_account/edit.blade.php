@@ -83,9 +83,10 @@
       		</div>
     </div>
 
-    <div class="form-group row">
-    	<div class="offset-sm-2 col-sm-10">
-        	<button type="submit" class="btn btn-primary">수정</button>
+    <div class="form-group row justify-content-center">
+    	<div>
+        	<button type="submit" class="btn btn-outline-primary" style="cursor:pointer">수정</button>
+		<a class="btn btn-outline-info" href="{{ url('account') }}" role="button">목록으로</a>
       	</div>
     </div>
 	<div>@empty</div>

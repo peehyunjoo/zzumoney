@@ -184,6 +184,6 @@ class AccountController extends Controller
     public function destroy($id)
     {
         $amount = \App\Account::where('idx','=',$id)->delete();
-        return redirect('fix_account');
+        return redirect('account');
     }
 }

@@ -8,11 +8,8 @@
 		top:2vh;
 		text-align:center;
 	}
-	tr{
-		text-align:center;
-	}
-	.total{
-		text-align:center;
+	th,tr,.total{
+		text-align:center !important;
 	}
 </style>
 @section('content')
@@ -49,7 +46,7 @@
 	    <td>{{$data->account_name}}</td>
 	    <td>{{number_format($data->amount)}}</td>
 	    <td><a class="btn btn-outline-primary hidden-sm-down" href="{{ route('account.edit', $data->idx)}}"  role="button">수정</a> &nbsp;
-		<a class="btn btn-outline-danger hidden-sm-down" href="{{ route('account.destroy',$data->idx)}}"  role="button">삭제</a>
+		<a class="btn btn-outline-danger hidden-sm-down" onclick="return confirm('삭제하시겠습니까?');" href="{{ route('account.destroy',$data->idx)}}"  role="button">삭제</a>
 		<a href="{{ route('account.edit', $data->idx)}}"><i class="fa fa-pencil hidden-md-up aria-hidden'true' "></i></a> &nbsp;
                 <a href="{{ route('account.destroy',$data->idx)}}"><i class="fa fa-times hidden-md-up"></i></a>
 		<!--<form class="" action="{{ route('account.destroy', $data->idx) }}" method="DELETE">
@@ -64,26 +61,50 @@
     		@endforelse
     	</tbody>
 	</table>
-	<div class="row total justify-content-md-center">
+	<table class="table table-sm">
+	<thead class="thead-default">
+	    <tr>
+	      <th>총수입</th>
+	      <th>{{number_format($sum[0])}}</th>
+	    </tr>
+	    <tr>
+              <th>총지출</th>
+              <th>{{number_format($sum[1])}}</th>
+            </tr>
+	    <tr>
+              <th>기타수입</th>
+              <th>{{number_format($sum[2])}}</th>
+            </tr>
+            <tr>
+              <th>기타지출</th>
+              <th>{{number_format($sum[3])}}</th>
+            </tr>
+            <tr>  
+              <th>총잔액</th>
+              <th>{{number_format($sum[4])}}</th>
+            </tr>
+	  </thead>
+	</table>
+	<!--<div class="row total justify-content-center">
 		<div class="col-4">총수입</div>
-		<div class="col-8">{{$sum[0]}}</div>
+		<div class="col-4">{{number_format($sum[0])}}</div>
 	</div>
-	<div class="row total justify-content-md-center">
+	<div class="row total justify-content-center">
                 <div class="col-4">총지출</div>
-                <div class="col-8">{{$sum[1]}}</div>
+                <div class="col-4">{{number_format($sum[1])}}</div>
         </div>
-	<div class="row total justify-content-md-center">
+	<div class="row total justify-content-center">
                 <div class="col-4">기타수입</div>
-                <div class="col-8">{{$sum[2]}}</div>
+                <div class="col-4">{{number_format($sum[2])}}</div>
         </div>
-	<div class="row total justify-content-md-center">
+	<div class="row total justify-content-center">
                 <div class="col-4">기타지출</div>
-                <div class="col-8">{{$sum[3]}}</div>
+                <div class="col-4">{{number_format($sum[3])}}</div>
         </div>
-	<div class="row total justify-content-md-center">
+	<div class="row total justify-content-center">
                 <div class="col-4">총잔액</div>
-                <div class="col-8">{{$sum[4]}}</div>
+                <div class="col-4">{{number_format($sum[4])}}</div>
         </div>
-	</div>
+	</div>-->
 </div>
 @stop
