@@ -46,12 +46,10 @@
 	    <td>{{$data->account_name}}</td>
 	    <td>{{number_format($data->amount)}}</td>
 	    <td><a class="btn btn-outline-primary hidden-sm-down" href="{{ route('account.edit', $data->idx)}}"  role="button">수정</a> &nbsp;
-		<a class="btn btn-outline-danger hidden-sm-down" onclick="return confirm('삭제하시겠습니까?');" href="{{ route('account.destroy',$data->idx)}}"  role="button">삭제</a>
-		<a href="{{ route('account.edit', $data->idx)}}"><i class="fa fa-pencil hidden-md-up aria-hidden'true' "></i></a> &nbsp;
-                <a href="{{ route('account.destroy',$data->idx)}}"><i class="fa fa-times hidden-md-up"></i></a>
-		<!--<form class="" action="{{ route('account.destroy', $data->idx) }}" method="DELETE">
-    			<button type="submit" class="btn btn-danger">삭제</button>
-		</form>-->
+		<a class="btn btn-outline-danger hidden-sm-down delete" onclick="return confirm('삭제하시겠습니까?');" href="{{ route('account.destroy',$data->idx)}}" role="button">삭제</a>
+		<!--모바일일때 fontawesome아이콘-->
+		<a href="{{ route('account.edit', $data->idx)}}"><i class="fa fa-pencil hidden-md-up aria-hidden'true' " ></i></a> &nbsp;
+                <a href="{{ route('account.destroy',$data->idx)}}" onclick="return confirm('삭제하시겠습니까?');"><i class="fa fa-times hidden-md-up"></i></a>
 		</td>
 	    </tr>
 		@empty
